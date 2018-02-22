@@ -1,0 +1,18 @@
+<div id="doc" style="text-align:center">
+  <h1>
+    Мои документы
+  </h1>
+  <table border="1">
+    <th>Номер</th>
+    <th>Название</th>
+    <th>Дата</th>
+    <th>Действия</th>
+    <tr *ngFor="let document of documents">
+      <td>{{document.id}}</td>
+      <td>{{document.name}}</td>
+      <td>{{document.date}}</td>
+      <td><button (click)="getDocumentById(document.id)">Скачать</button> <button (click)="deleteDocument(document.id)">Удалить</button></td>
+    </tr>
+  </table>
+  <p><select><option *ngFor="let agent of agents">{{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
+</div>

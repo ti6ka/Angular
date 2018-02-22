@@ -1,0 +1,6 @@
+  <form #myForm="ngForm" novalidate>
+    <p><input type="text" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Логин"></p>
+    <p><input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Пароль"></p>
+    <p><button (click)="login()">Войти</button></p>
+  </form>
+
