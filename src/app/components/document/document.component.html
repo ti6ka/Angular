@@ -14,5 +14,25 @@
       <td><button (click)="getDocumentById(document.id)">Скачать</button> <button (click)="deleteDocument(document.id)">Удалить</button></td>
     </tr>
   </table>
-  <p><select><option *ngFor="let agent of agents">{{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
+  <form #myForm="ngForm" novalidate>
+    <p><select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.unp}} {{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
+    <p><input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="Товар"></p>
+    <p><input type="text" name="measure" [(ngModel)]="model.measure" #measure="ngModel" placeholder="Единица измерения"></p>
+    <p><input type="text" name="number" [(ngModel)]="model.number" #number="ngModel" placeholder="Количество"></p>
+    <p><input type="text" name="price" [(ngModel)]="model.price" #price="ngModel" placeholder="Цена"></p>
+    <p><button (click)="addProduct()">Добавить товар</button></p>
+    <table border="1">
+    <th>Товар</th>
+    <th>Единица измерения</th>
+    <th>Количество</th>
+    <th>Цена</th>
+    <tr *ngFor="let product of products">
+      <td>{{product.name}}</td>
+      <td>{{product.measure}}</td>
+      <td>{{product.number}}</td>
+      <td>{{product.price}}</td>
+    </tr>
+    </table>
+    <p><button (click)="addDocumentTN()">Добавить документ</button></p>
+  </form>
 </div>
