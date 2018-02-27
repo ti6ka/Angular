@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<h1>
+  Мои контрагенты
+</h1>
+<form #myForm="ngForm" novalidate>
+  <p><input type="text" name="lastName" [(ngModel)]="agent.lastName" #lastName="ngModel" placeholder="Фамилия">
+  <input type="text" name="firstName" [(ngModel)]="agent.firstName" #firstName="ngModel" placeholder="Имя">
+  <input type="text" name="middleName" [(ngModel)]="agent.middleName" #middleName="ngModel" placeholder="Отчество"></p>
+  <p><input type="text" name="unp" [(ngModel)]="agent.unp" #unp="ngModel" placeholder="УНП">
+  <input type="text" name="organization" [(ngModel)]="agent.organization" #organization="ngModel" placeholder="Организация">
+  <input type="text" name="position" [(ngModel)]="agent.position" #position="ngModel" placeholder="Должность"></p>
+  <p><input type="text" name="address" [(ngModel)]="agent.address" #address="ngModel" placeholder="Адрес">
+  <input type="text" name="rs" [(ngModel)]="agent.rs" #rs="ngModel" placeholder="Р/с">
+  <input type="text" name="ks" [(ngModel)]="agent.ks" #ks="ngModel" placeholder="К/с"></p>
+  <p><input type="text" name="bank" [(ngModel)]="agent.bank" #bank="ngModel" placeholder="Банк">
+  <input type="text" name="bik" [(ngModel)]="agent.bik" #bik="ngModel" placeholder="БИК">
+  <input type="text" name="phone" [(ngModel)]="agent.phone" #phone="ngModel" placeholder="Телефон"></p>
+  <p><button (click)="addAgent()">Добавить контрагента</button></p>
+</form>
+<table>
+  <th>УНП</th>
+  <th>Фамилия</th>
+  <th>Имя</th>
+  <th>Отчество</th>
+  <th>Действия</th>
+  <tr *ngFor="let agent of agents">
+    <td>{{agent.unp}}</td>
+    <td>{{agent.lastName}}</td>
+    <td>{{agent.middleName }}</td>
+    <td>{{agent.firstName}}</td>
+    <td><button (click)="updateAgent(agent.id)">Изменить</button> <button (click)="deleteAgent(agent.id)">Удалить</button></td>
+  </tr>
+</table>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {DocumentService} from '../../services/document.service';
 import {Agent} from '../../models/agent';
 import {AgentService} from '../../services/agent.service';
 import {Product} from '../../models/product';
+import {Document} from '../../models/document';
 
 @Component({
   selector: 'app-document',
@@ -15,7 +16,6 @@ export class DocumentComponent implements OnInit {
   agents: Agent[];
   model: any = {};
   products: Product[] = [];
-  agent_id: number;
   constructor(private documentService: DocumentService, private agentService: AgentService) {}
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class DocumentComponent implements OnInit {
 
   getAlldocuments() {
     this.documentService.getAllDocuments()
-      .then(res => { this.documents = res; })
+      .then(res => { this.documents = res; console.log(this.documents); })
       .catch(err => err.toString());
   }
 
@@ -41,11 +41,10 @@ export class DocumentComponent implements OnInit {
 
   addProduct() {
     this.products.push(new Product(this.model.name, this.model.measure, this.model.number, this.model.price));
-    console.log(this.products);
   }
 
   addDocumentTN() {
-    this.documentService.addDocumentTN(this.agent.id, this.products)
+    this.documentService.addDocumentTN(this.agent.Id, this.products)
       .then(() => { this.getAlldocuments(); })
       .catch(err => err.toString());
   }

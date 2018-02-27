@@ -12,11 +12,13 @@ import {AuthGuard} from './services/authguard.service';
 import {DocumentComponent} from './components/document/document.component';
 import {DocumentService} from './services/document.service';
 import {AgentService} from './services/agent.service';
+import {AgentComponent} from './components/agent/agent.component';
 
 const appRoutes: Routes = [
   { path: 'index', component: IndexComponent},
   { path: 'main', component: MainComponent, canActivate: [AuthGuard]},
-  { path: 'documents', component: DocumentComponent, canActivate: [AuthGuard]}
+  { path: 'documents', component: DocumentComponent, canActivate: [AuthGuard]},
+  { path: 'agents', component: AgentComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     AppComponent,
     IndexComponent,
     MainComponent,
-    DocumentComponent
+    DocumentComponent,
+    AgentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,137 +1,119 @@
 export class Agent {
-  private _id: number;
-  private _username: string;
-  private _password: string;
-  private _firstName: string;
-  private _middleName: string;
-  private _lastName: string;
-  private _unp: string;
-  private _organization: string;
-  private _position: string;
-  private _address: string;
-  private _rs: string;
-  private _ks: string;
-  private _bank: string;
-  private _bik: string;
-  private _phone: string;
+  private id: number;
+  private firstName: string;
+  private middleName: string;
+  private lastName: string;
+  private unp: string;
+  private organization: string;
+  private position: string;
+  private address: string;
+  private rs: string;
+  private ks: string;
+  private bank: string;
+  private bik: string;
+  private phone: string;
 
-  get id(): number {
-    return this._id;
+  get Id(): number {
+    return this.id;
   }
 
-  set id(value: number) {
-    this._id = value;
+  set Id(value: number) {
+    this.id = value;
   }
 
-  get username(): string {
-    return this._username;
+  get FirstName(): string {
+    return this.firstName;
   }
 
-  set username(value: string) {
-    this._username = value;
+  set FirstName(value: string) {
+    this.firstName = value;
   }
 
-  get password(): string {
-    return this._password;
+  get MiddleName(): string {
+    return this.middleName;
   }
 
-  set password(value: string) {
-    this._password = value;
+  set MiddleName(value: string) {
+    this.middleName = value;
   }
 
-  get firstName(): string {
-    return this._firstName;
+  get LastName(): string {
+    return this.lastName;
   }
 
-  set firstName(value: string) {
-    this._firstName = value;
+  set LastName(value: string) {
+    this.lastName = value;
   }
 
-  get middleName(): string {
-    return this._middleName;
+  get Unp(): string {
+    return this.unp;
   }
 
-  set middleName(value: string) {
-    this._middleName = value;
+  set Unp(value: string) {
+    this.unp = value;
   }
 
-  get lastName(): string {
-    return this._lastName;
+  get Organization(): string {
+    return this.organization;
   }
 
-  set lastName(value: string) {
-    this._lastName = value;
+  set Organization(value: string) {
+    this.organization = value;
   }
 
-  get unp(): string {
-    return this._unp;
+  get Position(): string {
+    return this.position;
   }
 
-  set unp(value: string) {
-    this._unp = value;
+  set Position(value: string) {
+    this.position = value;
   }
 
-  get organization(): string {
-    return this._organization;
+  get Address(): string {
+    return this.address;
   }
 
-  set organization(value: string) {
-    this._organization = value;
+  set Address(value: string) {
+    this.address = value;
   }
 
-  get position(): string {
-    return this._position;
+  get Rs(): string {
+    return this.rs;
   }
 
-  set position(value: string) {
-    this._position = value;
+  set Rs(value: string) {
+    this.rs = value;
   }
 
-  get address(): string {
-    return this._address;
+  get Ks(): string {
+    return this.ks;
   }
 
-  set address(value: string) {
-    this._address = value;
+  set Ks(value: string) {
+    this.ks = value;
   }
 
-  get rs(): string {
-    return this._rs;
+  get Bank(): string {
+    return this.bank;
   }
 
-  set rs(value: string) {
-    this._rs = value;
+  set Bank(value: string) {
+    this.bank = value;
   }
 
-  get ks(): string {
-    return this._ks;
+  get Bik(): string {
+    return this.bik;
   }
 
-  set ks(value: string) {
-    this._ks = value;
+  set Bik(value: string) {
+    this.bik = value;
   }
 
-  get bank(): string {
-    return this._bank;
+  get Phone(): string {
+    return this.phone;
   }
 
-  set bank(value: string) {
-    this._bank = value;
-  }
-
-  get bik(): string {
-    return this._bik;
-  }
-
-  set bik(value: string) {
-    this._bik = value;
-  }
-
-  get phone(): string {
-    return this._phone;
-  }
-
-  set phone(value: string) {
-    this._phone = value;
+  set Phone(value: string) {
+    this.phone = value;
   }
 }
