@@ -18,6 +18,7 @@ export class IndexService {
         .then((response => {
           console.log(response);
           Cookie.set('token', 'Basic ' + btoa(user.username + ':' + user.password));
+          console.log(Cookie.get('token'));
           this.router.navigate(['/main']);
           return response.json();
         }))

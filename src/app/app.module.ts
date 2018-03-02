@@ -13,6 +13,7 @@ import {DocumentComponent} from './components/document/document.component';
 import {DocumentService} from './services/document.service';
 import {AgentService} from './services/agent.service';
 import {AgentComponent} from './components/agent/agent.component';
+import {PdfViewerComponent} from 'ng2-pdf-viewer';
 
 const appRoutes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     IndexComponent,
     MainComponent,
     DocumentComponent,
-    AgentComponent
+    AgentComponent,
+    PdfViewerComponent
   ],
   imports: [
     BrowserModule,

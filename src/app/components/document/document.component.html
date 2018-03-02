@@ -11,11 +11,17 @@
       <td>{{document.id}}</td>
       <td>{{document.name}}</td>
       <td>{{document.date}}</td>
-      <td><button (click)="getDocumentById(document.id)">Скачать</button> <button (click)="deleteDocument(document.id)">Удалить</button></td>
+      <td>
+        <button (click)="getDocumentById(document.id, '', document.name)">Скачать EXCEL</button>
+        <button (click)="getDocumentById(document.id, 'pdf', document.name)">Скачать PDF</button>
+        <button (click)="showDocument(document.id)">Просмотреть</button>
+        <button (click)="printDocument(document.id)">Печать</button>
+        <button (click)="deleteDocument(document.id)">Удалить</button>
+      </td>
     </tr>
   </table>
   <form id="tn" #myForm="ngForm" novalidate>
-    <p><select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.Unp}} {{agent.FirstName}} {{agent.MiddleName}} {{agent.LastName}}</option></select></p>
+    <p><select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.unp}} {{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
     <p><input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="Товар"></p>
     <p><input type="text" name="measure" [(ngModel)]="model.measure" #measure="ngModel" placeholder="Единица измерения"></p>
     <p><input type="text" name="number" [(ngModel)]="model.number" #number="ngModel" placeholder="Количество"></p>
@@ -35,4 +41,5 @@
     </table>
     <p><button (click)="addDocumentTN()">Добавить документ</button></p>
   </form>
+  <pdf-viewer [src]="pageurl" [original-size]="true" [show-all]="true"></pdf-viewer>
 </div>

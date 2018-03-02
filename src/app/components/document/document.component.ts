@@ -16,6 +16,8 @@ export class DocumentComponent implements OnInit {
   agents: Agent[];
   model: any = {};
   products: Product[] = [];
+  pageurl: Uint8Array;
+
   constructor(private documentService: DocumentService, private agentService: AgentService) {}
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class DocumentComponent implements OnInit {
 
   getAlldocuments() {
     this.documentService.getAllDocuments()
-      .then(res => { this.documents = res; console.log(this.documents); })
+      .then(res => { this.documents = res; })
       .catch(err => err.toString());
   }
 
@@ -35,8 +37,18 @@ export class DocumentComponent implements OnInit {
       .catch(err => err.toString());
   }
 
-  getDocumentById(id: number) {
-    this.documentService.getDocumentById(id);
+  getDocumentById(id: number, type: string, filename: string) {
+    this.documentService.getDocumentById(id, type, filename);
+  }
+
+  showDocument(id: number) {
+    this.documentService.showDocument(id)
+      .then(res => { this.pageurl = res; })
+      .catch(err => err.toString());
+  }
+
+  printDocument(id: number) {
+    this.documentService.printDocument(id);
   }
 
   addProduct() {
@@ -44,7 +56,7 @@ export class DocumentComponent implements OnInit {
   }
 
   addDocumentTN() {
-    this.documentService.addDocumentTN(this.agent.Id, this.products)
+    this.documentService.addDocumentTN(this.agent.id, this.products)
       .then(() => { this.getAlldocuments(); })
       .catch(err => err.toString());
   }
