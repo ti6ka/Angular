@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {IndexService} from '../../services/index.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -9,9 +8,10 @@ import {Router} from '@angular/router';
 })
 export class IndexComponent {
   model: any = {};
-  constructor(private indexService: IndexService, private router: Router) { }
+  constructor(private indexService: IndexService) { }
 
   login(): void {
+    console.log(this.model);
     this.indexService.login(this.model);
   }
 

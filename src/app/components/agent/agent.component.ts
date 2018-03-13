@@ -8,15 +8,15 @@ import {AgentService} from '../../services/agent.service';
   styleUrls: ['./agent.component.css']
 })
 export class AgentComponent implements OnInit {
-  agents: Agent[];
+  /*agents: Agent[];
   agent: Agent = new Agent();
-  constructor(private agentService: AgentService) {}
+  constructor(private agentService: AgentService) {}*/
 
   ngOnInit() {
-    this.getAllAgents();
+    //this.getAllAgents();
   }
 
-  getAllAgents() {
+  /*getAllAgents() {
     this.agentService.getAllAgents()
       .then(res => { this.agents = res; })
       .catch(err => { console.log(err); });
@@ -42,5 +42,5 @@ export class AgentComponent implements OnInit {
     this.agentService.deleteAgent(id)
       .then(() => { this.getAllAgents(); })
       .catch(err => err.toString());
-  }
+  }*/
 }

@@ -5,41 +5,53 @@
   <table border="1">
     <th>Номер</th>
     <th>Название</th>
+    <th>Тип</th>
     <th>Дата</th>
     <th>Действия</th>
     <tr *ngFor="let document of documents">
       <td>{{document.id}}</td>
       <td>{{document.name}}</td>
+      <td>{{document.type}}</td>
       <td>{{document.date}}</td>
       <td>
-        <button (click)="getDocumentById(document.id, '', document.name)">Скачать EXCEL</button>
-        <button (click)="getDocumentById(document.id, 'pdf', document.name)">Скачать PDF</button>
-        <button (click)="showDocument(document.id)">Просмотреть</button>
-        <button (click)="printDocument(document.id)">Печать</button>
+        <button (click)="getDocumentByIdInExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
+        <button (click)="getDocumentByIdInPDF(document.id, document.name, 'pdf')">Скачать PDF</button>
+        <button (click)="showDocument(document.id, document.name, document.type)">Просмотреть</button>
+        <button (click)="printDocument(document.id, document.name, document.type)">Печать</button>
         <button (click)="deleteDocument(document.id)">Удалить</button>
       </td>
     </tr>
   </table>
   <form id="tn" #myForm="ngForm" novalidate>
-    <p><select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.unp}} {{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
+    <p>Контрагент: <select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.unp}} {{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
+    <p>Водитель: <select name="driver" [(ngModel)]="driver"><option *ngFor="let driver of drivers" [ngValue]="driver">{{driver.firstName}} {{driver.middleName}} {{driver.lastName}}</option></select></p>
     <p><input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="Товар"></p>
     <p><input type="text" name="measure" [(ngModel)]="model.measure" #measure="ngModel" placeholder="Единица измерения"></p>
     <p><input type="text" name="number" [(ngModel)]="model.number" #number="ngModel" placeholder="Количество"></p>
     <p><input type="text" name="price" [(ngModel)]="model.price" #price="ngModel" placeholder="Цена"></p>
+    <p><input type="text" name="packageNumber" [(ngModel)]="model.packageNumber" #packageNumber="ngModel" placeholder="Количество мест"></p>
+    <p><input type="text" name="weight" [(ngModel)]="model.weight" #weight="ngModel" placeholder="Вес"></p>
+    <p><input type="text" name="note" [(ngModel)]="model.note" #note="ngModel" placeholder="Примечание"></p>
     <p><button (click)="addProduct()">Добавить товар</button></p>
     <table border="1">
     <th>Товар</th>
     <th>Единица измерения</th>
     <th>Количество</th>
     <th>Цена</th>
+    <th>Количество мест</th>
+    <th>Вес</th>
+    <th>Примечание</th>
     <tr *ngFor="let product of products">
-      <td>{{product.Name}}</td>
-      <td>{{product.Measure}}</td>
-      <td>{{product.Number}}</td>
-      <td>{{product.Price}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.measure}}</td>
+      <td>{{product.number}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.packageNumber}}</td>
+      <td>{{product.weight}}</td>
+      <td>{{product.note}}</td>
     </tr>
     </table>
-    <p><button (click)="addDocumentTN()">Добавить документ</button></p>
+    <p><button (click)="addDocumentTN()">Добавить документ ТН</button> <button (click)="addDocumentTTN()">Добавить документ TТН</button></p>
   </form>
   <pdf-viewer [src]="pageurl" [original-size]="true" [show-all]="true"></pdf-viewer>
 </div>

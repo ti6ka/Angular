@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import {IndexComponent} from './components/index/index.component';
 import {IndexService} from './services/index.service';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './components/main/main.component';
@@ -14,6 +13,7 @@ import {DocumentService} from './services/document.service';
 import {AgentService} from './services/agent.service';
 import {AgentComponent} from './components/agent/agent.component';
 import {PdfViewerComponent} from 'ng2-pdf-viewer';
+import {DriverService} from './services/driver.service';
 
 const appRoutes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -34,11 +34,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [IndexService, AuthGuard, DocumentService, AgentService],
+  providers: [IndexService, AuthGuard, DocumentService, AgentService, DriverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

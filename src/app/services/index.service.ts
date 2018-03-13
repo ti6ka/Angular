@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {Http} from '@angular/http';
-import { Headers } from '@angular/http';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class IndexService {
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  login(user: User): Promise<User> {
-    const header = new Headers({ Authorization : 'Basic ' + btoa(user.username + ':' + user.password) });
-    header.append('Content-Type', 'application/json');
+  login(user: User): Promise<any> {
+    const headers = new HttpHeaders({ Authorization : 'Basic ' + btoa(user.username + ':' + user.password),
+                                             'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/login', JSON.stringify(user), {headers: header}).toPromise()
-        .then((response => {
-          console.log(response);
+      this.http.post('http://localhost:8080/login', JSON.stringify(user), {headers: headers}).toPromise()
+        .then(response => {
           Cookie.set('token', 'Basic ' + btoa(user.username + ':' + user.password));
-          console.log(Cookie.get('token'));
           this.router.navigate(['/main']);
-          return response.json();
-        }))
-        .catch((error => {
-          console.log(error);
-          return error.json();
-        }));
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
     });
   }
 

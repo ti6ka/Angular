@@ -1,80 +1,79 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {Http} from '@angular/http';
-import {Headers} from '@angular/http';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 import {Agent} from '../models/agent';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class AgentService {
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getAllAgents(): Promise<Agent[]> {
-    const header = new Headers({ Authorization : Cookie.get('token')});
-    header.append('Content-Type', 'application/json');
+  getAllAgents(): Promise<any> {
+    const url = 'http://localhost:8080/agents/';
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:8080/agents/', {headers: header}).toPromise()
-        .then((response) => {
-          resolve(response.json());
+      this.http.get(url, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
         })
-        .catch((error) => {
-          resolve(error.json());
+        .catch(error => {
+          reject(error);
         });
     });
   }
 
-  getAgentById(id: number): Promise<Agent> {
-    const header = new Headers({ Authorization : Cookie.get('token')});
-    header.append('Content-Type', 'application/json');
+  getAgentById(id: number): Promise<any> {
+    const url = 'http://localhost:8080/agents/' + id;
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:8080/agents/' + id, {headers: header}).toPromise()
-        .then((response) => {
-          resolve(response.json());
+      this.http.get(url, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
         })
-        .catch((error) => {
-          resolve(error.json());
+        .catch(error => {
+          reject(error);
         });
     });
   }
 
-  addAgent(agent: Agent): Promise<Agent> {
-    const header = new Headers({ Authorization : Cookie.get('token')});
-    header.append('Content-Type', 'application/json');
+  addAgent(agent: Agent): Promise<any> {
+    const url = 'http://localhost:8080/agents/';
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/agents/', agent, {headers: header}).toPromise()
-        .then((response) => {
-          resolve(response.json());
+      this.http.post(url, agent, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
         })
-        .catch((error) => {
-          resolve(error.json());
+        .catch(error => {
+          reject(error);
         });
     });
   }
 
-  updateAgent(id: number, agent: Agent): Promise<Agent> {
-    const header = new Headers({ Authorization : Cookie.get('token')});
-    header.append('Content-Type', 'application/json');
+  updateAgent(id: number, agent: Agent): Promise<any> {
+    const url = 'http://localhost:8080/agents/' + id;
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.put('http://localhost:8080/agents/' + id, agent, {headers: header}).toPromise()
-        .then((response) => {
-          resolve(response.json());
+      this.http.put(url, agent, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
         })
-        .catch((error) => {
-          resolve(error.json());
+        .catch(error => {
+          reject(error);
         });
     });
   }
 
-  deleteAgent(id: number): Promise<Agent> {
-    const header = new Headers({ Authorization : Cookie.get('token')});
-    header.append('Content-Type', 'application/json');
+  deleteAgent(id: number): Promise<any> {
+    const url = 'http://localhost:8080/agents/' + id;
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
-      this.http.delete('http://localhost:8080/agents/' + id, {headers: header}).toPromise()
-        .then((response) => {
-          resolve(response.json());
+      this.http.delete(url, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
         })
-        .catch((error) => {
-          resolve(error.json());
+        .catch(error => {
+          reject(error);
         });
     });
   }
