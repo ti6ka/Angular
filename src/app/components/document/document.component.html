@@ -7,16 +7,18 @@
     <th>Название</th>
     <th>Тип</th>
     <th>Дата</th>
+    <th>Вид</th>
     <th>Действия</th>
     <tr *ngFor="let document of documents">
       <td>{{document.id}}</td>
       <td>{{document.name}}</td>
       <td>{{document.type}}</td>
       <td>{{document.date}}</td>
+      <td *ngFor="let uri of url"><img src={{uri}} weight="200" height="400"></td>
       <td>
         <button (click)="getDocumentByIdInExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
         <button (click)="getDocumentByIdInPDF(document.id, document.name, 'pdf')">Скачать PDF</button>
-        <button (click)="showDocument(document.id, document.name, document.type)">Просмотреть</button>
+        <button (click)="showDocumentInPdf(document.id, document.name, document.type)">Просмотреть</button>
         <button (click)="printDocument(document.id, document.name, document.type)">Печать</button>
         <button (click)="deleteDocument(document.id)">Удалить</button>
       </td>

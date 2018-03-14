@@ -13,6 +13,7 @@ import {DriverService} from '../../services/driver.service';
   styleUrls: ['./document.component.css']
 })
 export class DocumentComponent implements OnInit {
+  document: Document;
   documents: Document[];
   agent: Agent;
   agents: Agent[];
@@ -21,6 +22,7 @@ export class DocumentComponent implements OnInit {
   model: any = {};
   products: Product[] = [];
   pageurl: Uint8Array;
+  url: any[] = [];
 
   constructor(private documentService: DocumentService, private agentService: AgentService, private driverService: DriverService) {}
 
@@ -32,7 +34,12 @@ export class DocumentComponent implements OnInit {
 
   getAllDocuments() {
     this.documentService.getAllDocuments()
-      .then(res => { this.documents = res; })
+      .then(res => {
+        this.documents = res;
+        for (let doc of this.documents) {
+          this.showDocumentInPng(doc.id, doc.name, doc.type);
+        }
+      })
       .catch(err => err.toString());
   }
 
@@ -51,13 +58,20 @@ export class DocumentComponent implements OnInit {
   getDocumentByIdInPDF(id: number, filename: string, type: string) {
     this.documentService.getDocumentByIdInPDF(id, filename, type);
   }
+
   getDocumentByIdInExcel(id: number, filename: string, type: string) {
     this.documentService.getDocumentByIdInExcel(id, filename, type);
   }
 
-  showDocument(id: number, filename: string, type: string) {
-    this.documentService.showDocument(id, filename, type)
+  showDocumentInPdf(id: number, filename: string, type: string) {
+    this.documentService.showDocumentInPdf(id, filename, type)
       .then(res => { this.pageurl = res; })
+      .catch(err => err.toString());
+  }
+
+  showDocumentInPng(id: number, filename: string, type: string) {
+    this.documentService.showDocumentInPng(id, filename, type)
+      .then(res => { this.url.push('data:image/png;base64,' + res); })
       .catch(err => err.toString());
   }
 

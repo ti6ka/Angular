@@ -43,6 +43,20 @@ export class DocumentService {
     });
   }
 
+  convertExcelToPng(filename: string, type: string, file: string): Promise<any> {
+    const url = 'https://v2.convertapi.com/' + type + '/to/png?Secret=52S0t7G5mBiScc9K';
+    const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename, Data: file } }]};
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body).toPromise()
+        .then(data => {
+          resolve(data['Files'][0].FileData);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
   getDocumentByIdInPDF(id: number, filename: string, type: string): Promise<any> {
     const url = 'http://localhost:8080/documents/' + id;
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
@@ -82,7 +96,7 @@ export class DocumentService {
     });
   }
 
-  showDocument(id: number, filename: string, type: string): Promise<Uint8Array> {
+  showDocumentInPdf(id: number, filename: string, type: string): Promise<Uint8Array> {
     const url = 'http://localhost:8080/documents/' + id;
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
@@ -99,6 +113,32 @@ export class DocumentService {
                     .catch(error => {
                       reject(error);
                     });
+                })
+                .catch(error => {
+                  reject(error);
+                });
+            })
+            .catch(error => {
+              reject(error);
+            });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  showDocumentInPng(id: number, filename: string, type: string): Promise<Uint8Array> {
+    const url = 'http://localhost:8080/documents/' + id;
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {headers: headers, responseType: 'blob'}).toPromise()
+        .then(response => {
+          blobUtil.blobToBase64String(response)
+            .then((base64String) => {
+              this.convertExcelToPng(filename, type, base64String)
+                .then(blob => {
+                  resolve(blob);
                 })
                 .catch(error => {
                   reject(error);
