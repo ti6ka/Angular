@@ -14,7 +14,7 @@
   <p><input type="text" name="bank" [(ngModel)]="agent.bank" #bank="ngModel" placeholder="Банк">
   <input type="text" name="bik" [(ngModel)]="agent.bik" #bik="ngModel" placeholder="БИК">
   <input type="text" name="phone" [(ngModel)]="agent.phone" #phone="ngModel" placeholder="Телефон"></p>
-  <p><button (click)="addAgent()">Добавить контрагента</button></p>
+  <p><button (click)="addAgent()">Добавить контрагента</button> <button (click)="updateAgent(agent.id)">Изменить</button></p>
 </form>
 <table>
   <th>УНП</th>
@@ -25,8 +25,8 @@
   <tr *ngFor="let agent of agents">
     <td>{{agent.unp}}</td>
     <td>{{agent.lastName}}</td>
-    <td>{{agent.middleName }}</td>
-    <td>{{agent.firstName}}</td>
-    <td><button (click)="updateAgent(agent.id)">Изменить</button> <button (click)="deleteAgent(agent.id)">Удалить</button></td>
+    <td>{{agent.firstName }}</td>
+    <td>{{agent.middleName}}</td>
+    <td><button (click)="getAgentById(agent.id)">Изменить</button> <button (click)="deleteAgent(agent.id)">Удалить</button></td>
   </tr>
 </table>

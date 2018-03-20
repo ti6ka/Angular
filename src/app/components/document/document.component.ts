@@ -23,6 +23,7 @@ export class DocumentComponent implements OnInit {
   products: Product[] = [];
   pageurl: Uint8Array;
   url: any[] = [];
+  elements: any[];
 
   constructor(private documentService: DocumentService, private agentService: AgentService, private driverService: DriverService) {}
 
@@ -38,6 +39,7 @@ export class DocumentComponent implements OnInit {
         this.documents = res;
         for (let doc of this.documents) {
           this.showDocumentInPng(doc.id, doc.name, doc.type);
+          this.elements = this.documents.concat(this.url);
         }
       })
       .catch(err => err.toString());

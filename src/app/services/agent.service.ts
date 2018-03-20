@@ -42,9 +42,11 @@ export class AgentService {
     return new Promise((resolve, reject) => {
       this.http.post(url, agent, {headers: headers}).toPromise()
         .then(response => {
+          console.log(response);
           resolve(response);
         })
         .catch(error => {
+          console.log(error);
           reject(error);
         });
     });
@@ -56,9 +58,11 @@ export class AgentService {
     return new Promise((resolve, reject) => {
       this.http.put(url, agent, {headers: headers}).toPromise()
         .then(response => {
+          console.log(response);
           resolve(response);
         })
         .catch(error => {
+          console.log(error);
           reject(error);
         });
     });

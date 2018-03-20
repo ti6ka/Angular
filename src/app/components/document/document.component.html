@@ -9,12 +9,12 @@
     <th>Дата</th>
     <th>Вид</th>
     <th>Действия</th>
-    <tr *ngFor="let document of documents">
+    <tr *ngFor="let document of documents; let i=index">
       <td>{{document.id}}</td>
       <td>{{document.name}}</td>
       <td>{{document.type}}</td>
       <td>{{document.date}}</td>
-      <td *ngFor="let uri of url"><img src={{uri}} weight="200" height="400"></td>
+      <td><img src={{url[i]}} weight="200" height="400"></td>
       <td>
         <button (click)="getDocumentByIdInExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
         <button (click)="getDocumentByIdInPDF(document.id, document.name, 'pdf')">Скачать PDF</button>
