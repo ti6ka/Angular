@@ -17,7 +17,7 @@
       <td><img src={{url[i]}} weight="200" height="400"></td>
       <td>
         <button (click)="getDocumentByIdInExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
-        <button (click)="getDocumentByIdInPDF(document.id, document.name, 'pdf')">Скачать PDF</button>
+        <button (click)="getDocumentByIdInPDF(document.id, document.name, document.type)">Скачать PDF</button>
         <button (click)="showDocumentInPdf(document.id, document.name, document.type)">Просмотреть</button>
         <button (click)="printDocument(document.id, document.name, document.type)">Печать</button>
         <button (click)="deleteDocument(document.id)">Удалить</button>

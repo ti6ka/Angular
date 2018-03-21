@@ -27,7 +27,7 @@ export class DocumentService {
 
   convertExcelToPdf(filename: string, type: string, file: string): Promise<any> {
     const url = 'https://v2.convertapi.com/' + type + '/to/pdf?Secret=' + this.secret;
-    const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename, Data: file } }]};
+    const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename + '.' + type, Data: file } }]};
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
         .then(data => {
@@ -47,7 +47,7 @@ export class DocumentService {
 
   convertExcelToPng(filename: string, type: string, file: string): Promise<any> {
     const url = 'https://v2.convertapi.com/' + type + '/to/pdf?Secret=' + this.secret;
-    const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename, Data: file } }]};
+    const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename + '.' + type, Data: file } }]};
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
         .then(data => {
