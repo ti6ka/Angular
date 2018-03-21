@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 import {Product} from '../models/product';
+import {Work} from '../models/work';
 import * as FileSaver from 'file-saver';
 import * as blobUtil from 'blob-util';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class DocumentService {
+  secret = 'FuwZMNgDLw0ZIVYj';
   constructor(private http: HttpClient) { }
 
   getAllDocuments(): Promise<any> {
@@ -24,7 +26,7 @@ export class DocumentService {
   }
 
   convertExcelToPdf(filename: string, type: string, file: string): Promise<any> {
-    const url = 'https://v2.convertapi.com/' + type + '/to/pdf?Secret=52S0t7G5mBiScc9K';
+    const url = 'https://v2.convertapi.com/' + type + '/to/pdf?Secret=' + this.secret;
     const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename, Data: file } }]};
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
@@ -44,7 +46,7 @@ export class DocumentService {
   }
 
   convertExcelToPng(filename: string, type: string, file: string): Promise<any> {
-    const url = 'https://v2.convertapi.com/' + type + '/to/png?Secret=52S0t7G5mBiScc9K';
+    const url = 'https://v2.convertapi.com/' + type + '/to/pdf?Secret=' + this.secret;
     const body = { Parameters: [{ Name: 'File', FileValue: { Name: filename, Data: file } }]};
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
@@ -188,6 +190,36 @@ export class DocumentService {
   addDocumentTN(agent_id: number, products: Product[]): Promise<any> {
     const url = 'http://localhost:8080/documents/tn';
     const body = {agent_id: agent_id, products: products};
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  addDocumentTTN(agent_id: number, driver_id: number, products: Product[]): Promise<any> {
+    const url = 'http://localhost:8080/documents/ttn';
+    const body = {agent_id: agent_id, driver_id: driver_id, products: products};
+    const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, {headers: headers}).toPromise()
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  addDocumentASPR(agent_id: number, works: Work[]): Promise<any> {
+    const url = 'http://localhost:8080/documents/aspr';
+    const body = {agent_id: agent_id, works: works};
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
       this.http.post(url, body, {headers: headers}).toPromise()

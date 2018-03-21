@@ -11,7 +11,6 @@ export class IndexComponent {
   constructor(private indexService: IndexService) { }
 
   login(): void {
-    console.log(this.model);
     this.indexService.login(this.model);
   }
 
