@@ -6,5 +6,4 @@ export class Product {
   public packageNumber: number;
   public weight: number;
   public note: string;
-
 }

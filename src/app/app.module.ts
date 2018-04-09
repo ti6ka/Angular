@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import {IndexComponent} from './components/index/index.component';
 import {IndexService} from './services/index.service';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './components/main/main.component';
 import {AuthGuard} from './services/authguard.service';
@@ -35,6 +35,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [IndexService, AuthGuard, DocumentService, AgentService, DriverService],

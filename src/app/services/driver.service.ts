@@ -36,39 +36,35 @@ export class DriverService {
   }
 
   addDriver(driver: Driver): Promise<any> {
-    const url = 'http://localhost:8080/agents/';
+    const url = 'http://localhost:8080/drivers/';
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
       this.http.post(url, driver, {headers: headers}).toPromise()
         .then(response => {
-          console.log(response);
           resolve(response);
         })
         .catch(error => {
-          console.log(error);
           reject(error);
         });
     });
   }
 
-  updateAgent(id: number, driver: Driver): Promise<any> {
-    const url = 'http://localhost:8080/agents/' + id;
+  updateDriver(id: number, driver: Driver): Promise<any> {
+    const url = 'http://localhost:8080/drivers/' + id;
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
       this.http.put(url, driver, {headers: headers}).toPromise()
         .then(response => {
-          console.log(response);
           resolve(response);
         })
         .catch(error => {
-          console.log(error);
           reject(error);
         });
     });
   }
 
-  deleteAgent(id: number): Promise<any> {
-    const url = 'http://localhost:8080/agents/' + id;
+  deleteDriver(id: number): Promise<any> {
+    const url = 'http://localhost:8080/drivers/' + id;
     const headers = new HttpHeaders({ Authorization : Cookie.get('token'), 'Content-Type': 'application/json'});
     return new Promise((resolve, reject) => {
       this.http.delete(url, {headers: headers}).toPromise()

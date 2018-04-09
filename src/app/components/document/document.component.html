@@ -16,15 +16,16 @@
       <td>{{document.date}}</td>
       <td><img src={{url[i]}} weight="200" height="400"></td>
       <td>
-        <button (click)="getDocumentByIdInExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
-        <button (click)="getDocumentByIdInPDF(document.id, document.name, document.type)">Скачать PDF</button>
-        <button (click)="showDocumentInPdf(document.id, document.name, document.type)">Просмотреть</button>
-        <button (click)="printDocument(document.id, document.name, document.type)">Печать</button>
+        <button (click)="downloadExcel(document.id, document.name, document.type)">Скачать EXCEL</button>
+        <button (click)="downloadPDF(document.id, document.name)">Скачать PDF</button>
+        <button (click)="showPdf(document.id)">Просмотреть</button>
+        <button (click)="printDocument(document.id)">Печать</button>
         <button (click)="deleteDocument(document.id)">Удалить</button>
       </td>
     </tr>
   </table>
   <form id="tn" #myForm="ngForm" novalidate>
+    <p><input type="text" name="documentName" [(ngModel)]="model.documentName" #documentName="ngModel" placeholder="Название документа"></p>
     <p>Контрагент: <select name="agent" [(ngModel)]="agent"><option *ngFor="let agent of agents" [ngValue]="agent">УНП {{agent.unp}} {{agent.firstName}} {{agent.middleName}} {{agent.lastName}}</option></select></p>
     <p>Водитель: <select name="driver" [(ngModel)]="driver"><option *ngFor="let driver of drivers" [ngValue]="driver">{{driver.firstName}} {{driver.middleName}} {{driver.lastName}}</option></select></p>
     <p><input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="Товар"></p>

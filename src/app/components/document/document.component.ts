@@ -6,6 +6,7 @@ import {AgentService} from '../../services/agent.service';
 import {Product} from '../../models/product';
 import {Document} from '../../models/document';
 import {DriverService} from '../../services/driver.service';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-document',
@@ -38,7 +39,7 @@ export class DocumentComponent implements OnInit {
       .then(res => {
         this.documents = res;
         for (let doc of this.documents) {
-          this.showDocumentInPng(doc.id, doc.name, doc.type);
+          this.showPng(doc.id);
           this.elements = this.documents.concat(this.url);
         }
       })
@@ -57,28 +58,28 @@ export class DocumentComponent implements OnInit {
       .catch(err => err.toString());
   }
 
-  getDocumentByIdInPDF(id: number, filename: string, type: string) {
-    this.documentService.getDocumentByIdInPDF(id, filename, type);
+  downloadPDF(id: number, filename: string) {
+    this.documentService.downloadPDF(id, filename);
   }
 
-  getDocumentByIdInExcel(id: number, filename: string, type: string) {
-    this.documentService.getDocumentByIdInExcel(id, filename, type);
+  downloadExcel(id: number, filename: string, type: string) {
+    this.documentService.downloadExcel(id, filename, type);
   }
 
-  showDocumentInPdf(id: number, filename: string, type: string) {
-    this.documentService.showDocumentInPdf(id, filename, type)
+  showPdf(id: number) {
+    this.documentService.showPdf(id)
       .then(res => { this.pageurl = res; })
       .catch(err => err.toString());
   }
 
-  showDocumentInPng(id: number, filename: string, type: string) {
-    this.documentService.showDocumentInPng(id, filename, type)
+  showPng(id: number) {
+    this.documentService.showPng(id)
       .then(res => { this.url.push('data:image/png;base64,' + res); })
       .catch(err => err.toString());
   }
 
-  printDocument(id: number, filename: string, type: string) {
-    this.documentService.printDocument(id, filename, type);
+  printDocument(id: number) {
+    this.documentService.printDocument(id);
   }
 
   addProduct() {
@@ -94,7 +95,13 @@ export class DocumentComponent implements OnInit {
   }
 
   addDocumentTN() {
-    this.documentService.addDocumentTN(this.agent.id, this.products)
+    this.documentService.addDocumentTN(this.model.documentName, this.agent.id, this.products)
+      .then(res => { this.getAllDocuments(); })
+      .catch(err => err.toString());
+  }
+
+  addDocumentTTN() {
+    this.documentService.addDocumentTTN(this.model.documentName, this.agent.id, this.driver.id, this.products)
       .then(res => { this.getAllDocuments(); })
       .catch(err => err.toString());
   }
